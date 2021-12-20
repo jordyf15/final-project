@@ -35,31 +35,33 @@
             @endguest
         </div>
     
-        <div id="auth">
+        <div id="auth" class="dropdown">
             @auth
                 @if(Auth::user()->role == 'admin')
-                <div>
-                    <ul>
-                        <button>Profile Dropdown</button>
-                        <li><a href="/profile">Profile</a></li>
-                        <li><a href="/logout">Sign Out</a></li>
-                    </ul>
-                </div>
+                <button data-bs-toggle="dropdown" type="button" id="btn"><img src="/images/profile.png" alt=""></button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                    <li><a class="dropdown-item" href="/logout">Sign Out</a></li>
+                </ul>
                 @endif
             @endauth
         </div>
     
-        <div id="auth">
+        <div id="auth-member">
             @auth
                 @if(Auth::user()->role == 'member')
-                    <a href='/cart'>Cart</a>
-                    <button>Profile Dropdown</button>
-                    <div>
-                        <a href="/profile">Profile</a>
-                        <a href="/friend">Friends</a>
-                        <a href="/transactionhistory">Transaction History</a>
-                        <a href="/logout">Sign Out</a>
-                    </div>
+                <div id="cart">
+                    <a href='/cart'><img src="/images/cart.png" alt=""></a>
+                </div>
+                <div id="dropdown" class="dropdown">
+                    <button data-bs-toggle="dropdown" type="button" id="btn"><img src="/images/profile.png" alt=""></button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                        <li><a class="dropdown-item" href="/friend">Friends</a></li>
+                        <li><a class="dropdown-item" href="/transactionhistory">Transaction History</a></li>
+                        <li><a class="dropdown-item" href="/logout">Sign Out</a></li>
+                    </ul>
+                </div>
                 @endif
             @endauth
         </div>
