@@ -82,6 +82,23 @@ class UserController extends Controller
         return redirect('/');
     }
 
+    public function showCheckAgePage($game_id){
+        $game = Game::where('game_id', $game_id)->first();
+        return view('pages.checkage',['game'=>$game]);
+    }
+
+    public function checkage(Request $request){
+        $dob = new DateTime($request->dob);
+        $now = new DateTime();
+        $dayDiff = $now->diff($dob)->format('%a');
+        // 17 tahun == 6209.25 hari
+        if($dayDiff>=6209.25){//dia 17 tahun keatas
+            return redirect()->intended();
+        }else{// dibawah 17 tahun
+            return redirect('/')->withErrors('Sorry but this content is not appropriate for you');
+        }
+    }
+
     // public function updateUser(Request $request, $user_id){
     //     $user = User::where('user_id', $user_id)->first();
     //     $validation = Validator::make($request->all(),[

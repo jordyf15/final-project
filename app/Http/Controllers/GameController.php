@@ -99,16 +99,14 @@ class GameController extends Controller
             $cookie = Cookie::make('cart'.$user_id, json_encode([$game]), 120);
         }else{
             $carts = json_decode($cookie);
-            // foreach($carts as $game){
-            //     if($game->game_id == $game_id){
-            //         return back()->withErrors('The game already in your cart');
-            //     }
-            // }
             // dd($carts);
+            foreach($carts as $gameCart){
+                if($gameCart->game_id == $game_id){
+                    return back()->withErrors('The game already in your cart');
+                }
+            }
             array_push($carts, $game);
-            // dd($carts);
-            // dd($carts);
-            $cookie = Cookie::make('cart'.$user_id, json_encode([$carts]), 120);
+            $cookie = Cookie::make('cart'.$user_id, json_encode($carts), 120);
         }
         return back()->withCookie($cookie);
     }
