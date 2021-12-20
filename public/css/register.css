@@ -1,0 +1,24 @@
+#container
+{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+}
+#kiri
+{
+    padding: 6%;
+    width: 45%;
+    background-color: #181c24;
+    color: white
+}
+#kanan
+{
+    width: 55%;
+    background-image: url("../images/mountain.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#error
+{
+    color: red;
+}
