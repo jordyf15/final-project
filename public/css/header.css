@@ -35,7 +35,7 @@ body
     text-decoration: none;
     margin-left: 40px;
 }
-#manage-game-header
+#manage-game-header a
 {
     color: white;
     text-decoration: none;

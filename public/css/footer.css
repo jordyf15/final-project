@@ -1,0 +1,29 @@
+footer
+{
+    background-color: #181c24;
+    align-items: center;
+}
+#footer-container
+{
+    padding: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#footer-container p
+{
+    color: #9ba2aec7;
+    margin: 0;
+}
+#link-container
+{
+    margin-left: 1000px;
+    display: flex;
+    flex-direction: row;
+}
+#link-container a img
+{
+    margin-left: 30px;
+    height: 25px;
+    width: 25px;
+}
