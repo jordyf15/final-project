@@ -1,7 +1,22 @@
+main
+{
+    min-height: 76vh;
+}
+#main-container
+{
+    padding: 10px;
+}
+#main-title
+{
+    margin-left: 40px;
+    margin-top: 20px;
+}
 #game-display
 {
     display: grid;
-    grid-template-columns: repeat(4, 350px);
+    grid-template-columns: repeat(4, 300px);
+    gap: 50px;
+    /* grid-template-rows: repeat(2, 225px); */
     justify-content: center;
     padding: 20px;
 
@@ -19,7 +34,7 @@
 #home-game-cover
 {
     border-radius: 10px;
-    width:300px;
+    width:100%;
     height:170px;
 }
 #home-game-detail
