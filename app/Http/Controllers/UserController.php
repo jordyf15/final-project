@@ -87,13 +87,16 @@ class UserController extends Controller
         return view('pages.checkage',['game'=>$game]);
     }
 
-    public function checkage(Request $request){
+    public function checkage(Request $request, $game_id){
+        if($request->submit == 'cancel'){
+            return redirect('/')->withErrors('Sorry but this content is not appropriate for you');
+        }
         $dob = new DateTime($request->dob);
         $now = new DateTime();
         $dayDiff = $now->diff($dob)->format('%a');
         // 17 tahun == 6209.25 hari
         if($dayDiff>=6209.25){//dia 17 tahun keatas
-            return redirect()->intended();
+            return redirect('/game/'.$game_id)->with(['safe'=>true]);
         }else{// dibawah 17 tahun
             return redirect('/')->withErrors('Sorry but this content is not appropriate for you');
         }

@@ -18,8 +18,9 @@ class CheckAge
     public function handle(Request $request, Closure $next)
     {
         $game_id = $request->game_id;
+        $safe = session()->get('safe');
         $game = Game::where('game_id', $game_id)->first();
-        if($game->adult == 1){
+        if($game->adult == 1 && !$safe){
             return redirect('/checkage/'.$game_id);
         }
         return $next($request);

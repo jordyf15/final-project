@@ -15,6 +15,10 @@
     @else
         <p>No Game can be displayed</p>
     @endif  
-    
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            {{$error}}
+        @endforeach
+    @endif
 </main>
 @endsection

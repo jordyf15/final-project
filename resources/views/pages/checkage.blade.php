@@ -8,7 +8,7 @@
         <p>Please enter your birth date to continue</p>
         <input type="date" name="dob" id="dob">
         <button type="submit">View Page</button>
-        <button>Cancel</button>
+        <button name="cancel" value="cancel">Cancel</button>
     </form>
 </main>
 @endsection

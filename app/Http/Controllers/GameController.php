@@ -86,7 +86,7 @@ class GameController extends Controller
         return view('pages.search',["games"=>$games]);
     }
 
-    public function gameDetail($game_id){
+    public function gameDetail(Request $request, $game_id){
         $game = Game::where('game_id', $game_id)->first();
         return view('pages.gameDetail', ['game'=>$game]);
     }

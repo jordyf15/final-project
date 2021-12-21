@@ -36,7 +36,7 @@ Route::get('/game/{game_id}', [GameController::class, 'gameDetail'])->middleware
 Route::get('/cart/{game_id}', [GameController::class, 'addCart']);
 
 Route::get('/checkage/{game_id}', [UserController::class, 'showCheckAgePage']);
-Route::post('/checkage', [UserController::class, 'checkage']);
+Route::post('/checkage/{game_id}', [UserController::class, 'checkage']);
 
 // Route::get('/gameAdult/{game_id}', [GameController::class, 'checkGameAdult']);
 // Route::get('/checkage/{game_id}', [UserController::class, 'showCheckAgePage']);
