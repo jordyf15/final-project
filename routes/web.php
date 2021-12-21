@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Models\Game;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,9 @@ Route::get('/cart/{game_id}', [GameController::class, 'addCart']);
 
 Route::get('/checkage/{game_id}', [UserController::class, 'showCheckAgePage']);
 Route::post('/checkage/{game_id}', [UserController::class, 'checkage']);
+
+Route::get('/cart', [TransactionController::class, 'showShoppingCartPage']);
+Route::delete('/cart/{game_id}', [TransactionController::class, 'deleteGameFromCart']);
 
 // Route::get('/gameAdult/{game_id}', [GameController::class, 'checkGameAdult']);
 // Route::get('/checkage/{game_id}', [UserController::class, 'showCheckAgePage']);
