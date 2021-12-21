@@ -22,9 +22,9 @@
     <p>ABOUT THIS GAME</p>
     <p>{{$game->description_long}}</p>
     @if ($errors->any())
-    @foreach ($errors->all() as $error)
-        {{$error}}
-    @endforeach
-@endif
+        @foreach ($errors->all() as $error)
+            {{$error}}
+        @endforeach
+    @endif
 </main>
 @endsection

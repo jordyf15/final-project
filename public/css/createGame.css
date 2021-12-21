@@ -1,0 +1,46 @@
+#creategame-container
+{
+    background-color: #d1d5db;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+#creategame-title
+{
+    color: #384050;
+}
+.creategame-input
+{
+    display: block;
+    width: 100%;
+    background-color: #d1d5db;
+    height: 100px;
+    /* opacity: 0; */
+    border: 3px solid white;
+    border-style: dashed;
+    border-radius: 5px;
+    text-align: center;
+}
+::file-selector-button 
+{
+    display: none;
+}
+#creategame-button-container
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+#creategame-cancel
+{
+    color: #384050;
+    background-color: white;
+    
+}
+#creategame-save
+{
+    color: white;
+    background-color: #384050;
+    margin-left: 20px;
+}
+
