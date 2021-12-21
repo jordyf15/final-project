@@ -17,7 +17,7 @@ class CreateGameTable extends Migration
             $table->id('game_id');
             $table->string('name');
             $table->string('description');
-            $table->string('description_long');
+            $table->longText('description_long');
             $table->string('category');
             $table->string('developer');
             $table->string('publisher');
