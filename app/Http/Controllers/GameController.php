@@ -102,13 +102,14 @@ class GameController extends Controller
             // dd($carts);
             foreach($carts as $gameCart){
                 if($gameCart->game_id == $game_id){
-                    return back()->withErrors('The game already in your cart');
+                    return back()->withErrors('The game already in your cart')->with(['safe'=>true]);
                 }
             }
             array_push($carts, $game);
             $cookie = Cookie::make('cart'.$user_id, json_encode($carts), 120);
         }
-        return back()->withCookie($cookie);
+
+        return back()->withCookie($cookie)->with(['safe'=>true]);
     }
 
     // public function checkGameAdult($game_id){
