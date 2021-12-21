@@ -1,0 +1,55 @@
+#game-detail-container
+{
+    background-color: #d1d5db;
+}
+#bread-container
+{
+    align-items: center;
+}
+.breadcrumb
+{
+    margin: 0% !important;
+    
+}
+#bread a img
+{
+    width: 18px;
+    height: 18px;
+}
+#bread ol
+{
+    padding: 20px;
+}
+#detail-game
+{
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+#detail-game-container
+{
+    margin-left: 25px;
+}
+#game-img-container img
+{
+    border-radius: 5px;
+}
+#game-title-container
+{
+    margin-top: 10px;
+}
+#game-title-container h2
+{
+    color: #374151;
+}
+#game-de-container
+{
+    display: flex;
+    flex-direction: row;
+}
+#game-de-container p
+{
+    font-weight: bold;
+    color: #374151;
+}
