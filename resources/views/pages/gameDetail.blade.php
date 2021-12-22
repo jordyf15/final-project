@@ -27,31 +27,33 @@
                 <div id="game-de-container"><p>Publisher: </p>{{$game->publisher}}</div>
             </div>
         </div>
-        <div>
-
+        <div id="detail-game-bottom-container">
+            <div id="game-price-container-left">
+                <div id="price-left">Buy {{$game->name}}</div>
+            </div>
+            <div id="game-price-container-right">
+                <div id="price-right">
+                    @guest
+                        <a href="/login">Rp. {{$game->price}} | Add to cart</a>
+                    @endguest
+                    @auth
+                        @if (Auth::user() && Auth::user()->role == 'member')
+                            <a href='/cart/{{$game->game_id}}'>Rp. {{$game->price}} | Add to cart</a>
+                        @endif   
+                    @endauth
+                </div>
+            </div>
         </div>
+        <div id="detail-game-description">
+            <div id="detail-game-description-title"><p>ABOUT THIS GAME</p></div>
+            <div id="detail-game-line"></div>
+            <div id="detail-game-description-desc"><p>{{$game->description_long}}</p></div>
+        </div>
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                {{$error}}
+            @endforeach
+        @endif
     </div>
-    
-    
-    
-    
-   
-    
-    
-    @guest
-    <a href="/login">Rp. {{$game->price}} | Add to cart</a>
-    @endguest
-    @auth
-        @if (Auth::user() && Auth::user()->role == 'member')
-            <a href='/cart/{{$game->game_id}}'>Rp. {{$game->price}} | Add to cart</a>
-        @endif   
-    @endauth
-    <p>ABOUT THIS GAME</p>
-    <p>{{$game->description_long}}</p>
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            {{$error}}
-        @endforeach
-    @endif
 </main>
 @endsection
