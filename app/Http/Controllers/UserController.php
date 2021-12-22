@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FriendList;
 use App\Models\Game;
+use App\Models\GameLibrary;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\User;
@@ -70,9 +72,18 @@ class UserController extends Controller
             $user -> password = Hash::make($password);
             $user -> role = $request -> role;
             $user -> level = 1;
-            $user -> profile_picture = 'public/images/default_picture';
+            $user -> profile_picture = '/images/default_picture';
             
             $user->save();
+            
+            $gameLibrary = new GameLibrary();
+            $gameLibrary -> user_id = $user->user_id;
+            $gameLibrary->save();
+
+            $friendList = new FriendList();
+            $friendList->user_id = $user->user_id;
+            $friendList->save();
+
             return redirect('/');
         }
     }

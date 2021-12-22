@@ -42,6 +42,9 @@ Route::post('/checkage/{game_id}', [UserController::class, 'checkage']);
 Route::get('/cart', [TransactionController::class, 'showShoppingCartPage']);
 Route::delete('/cart/{game_id}', [TransactionController::class, 'deleteGameFromCart']);
 
+Route::get('/checkout', [TransactionController::class, 'showTransactionInformationPage']);
+Route::post('/checkout', [TransactionController::class, 'checkout']);
+
 // Route::get('/gameAdult/{game_id}', [GameController::class, 'checkGameAdult']);
 // Route::get('/checkage/{game_id}', [UserController::class, 'showCheckAgePage']);
 // Route::post('/checkage/{game_id}', [UserController::class, 'checkAge']);
