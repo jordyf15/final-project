@@ -49,6 +49,10 @@ Route::get('/receipt', [TransactionController::class, 'showTransactionReceiptPag
 Route::get('/manageGame', [GameController::class, 'showManageGamePage']);
 Route::post('/manageGame', [GameController::class, 'filterManageGamePage']);
 
+Route::delete('/game/{game_id}', [GameController::class, 'deleteGame']);
+
+Route::get('/updateGame/{game_id}', [GameController::class, 'showUpdateGamePage']);
+Route::put('/updateGame/{game_id}', [GameController::class, 'updateGame']);
 // Route::get('/gameAdult/{game_id}', [GameController::class, 'checkGameAdult']);
 // Route::get('/checkage/{game_id}', [UserController::class, 'showCheckAgePage']);
 // Route::post('/checkage/{game_id}', [UserController::class, 'checkAge']);

@@ -53,7 +53,9 @@
             @for($i=0;$i<count($games);$i++)
             <div>
                 <div>
-                    <img src={{Storage::url($games[$i]->cover)}} alt={{$games[$i]->name}}>
+                    <a href="/game/{{$games[$i]->game_id}}">
+                        <img src={{Storage::url($games[$i]->cover)}} alt={{$games[$i]->name}}>
+                    </a>
                     <div>
                         <div>{{$games[$i]->name}}</div>
                         <div>{{$games[$i]->category}}</div>
@@ -99,7 +101,7 @@
                     @csrf
                     @method('DELETE')
                     <button type='submit' id="managegame-delete-btn">Delete</button>
-                    <button id="managegame-cancel-btn">Cancel</button>
+                    <button type='button' id="managegame-cancel-btn">Cancel</button>
                 </form>
             `;
         }

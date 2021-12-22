@@ -153,73 +153,59 @@ class GameController extends Controller
         }
     }
 
-    // public function checkGameAdult($game_id){
-    //     $game = Game::where('game_id',$game_id)->first();
-    //     if($game->adult == 1){
-    //         return redirect('/checkage/'.$game_id);
-    //     }else{
-    //         return redirect('/game/'.$game_id);
-    //     } 
-    // }
+    public function deleteGame($game_id){
+        $game = Game::where('game_id', $game_id)->first();
+        $game->delete();
+        return back();
+    }
 
+    public function showUpdateGamePage($game_id){
+        if(Auth::user() && Auth::user()->role == 'admin'){
+            $game = Game::where('game_id', $game_id)->first();
+            return view('pages.updateGame', ['game'=>$game]);
+        }else{
+            return redirect('/');
+        }
+    }
 
-    // public function manageGamePage(){
-    //     // $games = Game::all()->paginate(8);
-    //     $games = Game::all();
-    //     return view('manageGame', ['games'=>$games]);
-    // }
+    public function updateGame(Request $request, $game_id){
+        $validation = Validator::make($request->all(),[
+            'description'=>['required','max:500'],
+            'description_long'=>['required','max:2000'],
+            'category'=>['required',
+            Rule::in(['Idle','Strategy','Horror','Role-Playing','Adventure','Puzzle','Action','Simulation','Sports']),
+            ],
+            'price'=>['required','numeric','max:1000000'],
+            'cover'=>['nullable','mimes:jpg','max:100'],
+            'trailer'=>['nullable','mimes:webm','max:100000'],
+        ]);
 
-    // public function updateGamePage($game_id){
-    //     $game = Game::where('game_id', $game_id)->first();
-    //     // dd($game, $game_id);
-    //     return view('updateGame', ['game'=>$game]);
-    // }
+        if($validation->fails()){
+            return back()->withErrors($validation->errors());
+        }
 
-    // public function updateGame(Request $request, $game_id){
-    //     $validation = Validator::make($request->all(),[
-    //         'description'=>['required','max:500'],
-    //         'description_long'=>['required','max:2000'],
-    //         'category'=>['required',
-    //         Rule::in(['Idle','Strategy','Horror','Role-Playing','Adventure','Puzzle','Action','Simulation','Sports']),
-    //         ],
-    //         'price'=>['required','numeric','max:1000000'],
-    //         'cover'=>['nullable','mimes:jpg','max:100'],
-    //         'trailer'=>['nullable','mimes:webm','max:100000'],
-    //     ]);
+        $game = Game::where('game_id', $game_id)->first();
+        $new_description = $request->description;
+        $new_description_long = $request->description_long;
+        $new_category = $request->category;
+        $new_price = $request->price;
+        $new_path_cover = null;
+        $new_path_trailer = null;
 
-    //     if($validation->fails()){
-    //         return back()->withErrors($validation->errors());
-    //     }
+        $game->description = $new_description;
+        $game->description_long = $new_description_long;
+        $game->category = $new_category;
+        $game->price = $new_price;
+        if($request->cover){
+            $new_path_cover = $request->file('cover')->store('public/images');
+            $game->cover = $new_path_cover;
+        }
+       if($request->trailer){
+            $new_path_trailer = $request->file('trailer')->store('public/images');
+            $game->trailer = $new_path_trailer;
+       }
 
-    //     $game = Game::where('game_id', $game_id)->first();
-    //     $new_description = $request->description;
-    //     $new_description_long = $request->description_long;
-    //     $new_category = $request->category;
-    //     $new_price = $request->price;
-    //     $new_path_cover = null;
-    //     $new_path_trailer = null;
-
-    //     $game->description = $new_description;
-    //     $game->description_long = $new_description_long;
-    //     $game->category = $new_category;
-    //     $game->price = $new_price;
-    //     if($request->cover){
-    //         $new_path_cover = $request->file('cover')->store('public/images');
-    //         $game->cover = $new_path_cover;
-    //     }
-    //    if($request->trailer){
-    //         $new_path_trailer = $request->file('trailer')->store('public/images');
-    //         $game->trailer = $new_path_trailer;
-    //    }
-
-    //    $game->save();
-    //    return redirect('/manageGame');
-        
-    // }
-
-    // public function deleteGame($game_id){
-    //     $game = Game::where('game_id', $game_id)->first();
-    //     $game->delete();
-    //     return back();
-    // }
+       $game->save();
+       return redirect('/manageGame');
+    }
 }
