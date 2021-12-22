@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GameLibraryDetail;
+use App\Models\TransactionDetail;
+use App\Models\TransactionHeader;
 use App\Models\User;
 use App\Rules\CardNumberFormat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -74,10 +78,61 @@ class TransactionController extends Controller
         if($validation->fails()){
             return back()->withErrors($validation->errors());
         }
+        $cardName = $request->cardName;
+        $cardNumber = $request->cardNumber;
+        $cvccvv = $request->cvccvv;
+        $cardCountry = $request->cardCountry;
+        $zip = $request->zip;
+
         $user_id = Auth::user()->user_id;
         $cookie = Cookie::get('cart'.$user_id);
         $games = json_decode($cookie);
         $user = User::where('user_id',$user_id)->first();
+        $user->level +=count($games);
+        $user->save();
+
+        // ERROR!!!!!!!!
+        dd($user->gameLibrary);
+        
+        $gameLibrary = $user->gameLibrary;
+        $totalPrice = 0;
+        for($i = 0;$i<count($games);$i++){
+            $gameLibraryDetail = new GameLibraryDetail();
+            $gameLibraryDetail->library_id = $gameLibrary->library_id;
+            $gameLibraryDetail->game_id = $games[$i]->game_id;
+            $totalPrice += $games[$i]->price;
+            $gameLibraryDetail->save();
+        }
+        $transactionHeader = new TransactionHeader();
+        $transactionHeader->user_id = $user_id;
+        $transactionHeader->card_name = $cardName;
+        $transactionHeader->card_number = $cardNumber;
+        $transactionHeader->cvccvv = $cvccvv;
+        $transactionHeader->country = $cardCountry;
+        $transactionHeader->zip_code = $zip;
+        $transactionHeader->total_price = $totalPrice;
+        $transactionHeader->purchase_date = new Date();
+        $transactionHeader->save();
+
+        for($i = 0;$i<count($games);$i++){
+            $transactionDetail = new TransactionDetail();
+            $transactionDetail->price = $games[$i]->price;
+            $transactionDetail->transaction_header_id = $transactionHeader->transaction_header_id;
+            $transactionDetail->game_id = $games[$i]->game_id;
+            $transactionDetail->save();
+        }
+
+        return redirect('/receipt')->with('transactionId',$transactionHeader->transaction_header_id);
+    }
+
+    public function showTransactionReceiptPage(){
+        if(Auth::user() && Auth::user()->role == 'member'){
+            $transactionId = session()->get('transactionId');
+            $transactionHeader = TransactionHeader::where('transaction_header_id', $transactionId)->first();
+            return view('pages.transactionReceipt',['transactionHeader'=>$transactionHeader]);
+        }else{
+            return redirect('/');
+        }
     }
     //
 }

@@ -16,7 +16,7 @@
         <div id="manage-game-header">
             @auth
                 @if(Auth::user()->role == 'admin')
-                    <a href="/managegame">Manage Game</a>
+                    <a href="/manageGame">Manage Game</a>
                 @endif
             @endauth
         </div>

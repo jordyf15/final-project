@@ -1,9 +1,9 @@
 @extends('layout.layout')
 @section('content')
     <div>
-        <a href="">Shopping Cart</a>
-        <a href="">Transaction Information</a>
-        <a href="">Transaction Receipt</a>
+        <p>Shopping Cart</p>
+        <p>Transaction Information</p>
+        <p>Transaction Receipt</p>
     </div>
     <h1>Shopping Cart</h1>
     <div>

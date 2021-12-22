@@ -112,6 +112,47 @@ class GameController extends Controller
         return back()->withCookie($cookie)->with(['safe'=>true]);
     }
 
+    public function showManageGamePage(){
+        if(Auth::user() && Auth::user()->role == 'admin'){
+            $games = Game::paginate(8);
+            return view('pages.manageGame', ['games'=>$games]);
+        }else{
+            return redirect('/');
+        }
+    }
+
+    public function filterManageGamePage(Request $request){
+        if(Auth::user() && Auth::user()->role == 'admin'){
+            $filterName = $request->filterName;
+            $filterIdle = $request->filterIdle;
+            $filterHorror = $request->filterHorror;
+            $filterAdventure = $request->filterAdventure;
+            $filterAction = $request->filterAction;
+            $filterSports = $request->filterSports;
+            $filterStrategy = $request->filterStrategy;
+            $filterRolePlaying = $request->filterRolePlaying;
+            $filterPuzzle = $request->filterPuzzle;
+            $filterSimulation = $request->filterSimulation;
+            $filterGenres = [];
+            if($filterIdle == "on") array_push($filterGenres, "Idle");
+            if($filterHorror == "on") array_push($filterGenres, "Horror");
+            if($filterAdventure == "on") array_push($filterGenres, "Adventure");
+            if($filterAction == "on") array_push($filterGenres, "Action");
+            if($filterSports == "on") array_push($filterGenres, "Sports");
+            if($filterStrategy == "on") array_push($filterGenres, "Strategy");
+            if($filterRolePlaying == "on") array_push($filterGenres, "Role-Playing");
+            if($filterPuzzle == "on") array_push($filterGenres, "Puzzle");
+            if($filterSimulation == "on") array_push($filterGenres, "Simulation");
+            if(count($filterGenres)==0){
+                $filterGenres = ['Idle', 'Horror', 'Adventure', 'Action', 'Sports', 'Strategy', 'Role-Playing', 'Puzzle', 'Simulation'];
+            }
+            $games = Game::where('name','like', '%'.$filterName.'%')->whereIn('category',$filterGenres)->paginate(8);
+            return view('pages.manageGame', ['games'=>$games]);
+        }else{
+            return redirect('/');
+        }
+    }
+
     // public function checkGameAdult($game_id){
     //     $game = Game::where('game_id',$game_id)->first();
     //     if($game->adult == 1){

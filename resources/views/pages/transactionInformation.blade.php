@@ -1,6 +1,11 @@
 @extends('layout.layout')
 @section('content')
     <main>
+        <div>
+            <p>Shopping Cart</p>
+            <p>Transaction Information</p>
+            <p>Transaction Receipt</p>
+        </div>
         <h1>Transaction Information</h1>
         <form action="" method="POST">
             @csrf

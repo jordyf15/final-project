@@ -44,6 +44,10 @@ Route::delete('/cart/{game_id}', [TransactionController::class, 'deleteGameFromC
 
 Route::get('/checkout', [TransactionController::class, 'showTransactionInformationPage']);
 Route::post('/checkout', [TransactionController::class, 'checkout']);
+Route::get('/receipt', [TransactionController::class, 'showTransactionReceiptPage']);
+
+Route::get('/manageGame', [GameController::class, 'showManageGamePage']);
+Route::post('/manageGame', [GameController::class, 'filterManageGamePage']);
 
 // Route::get('/gameAdult/{game_id}', [GameController::class, 'checkGameAdult']);
 // Route::get('/checkage/{game_id}', [UserController::class, 'showCheckAgePage']);
