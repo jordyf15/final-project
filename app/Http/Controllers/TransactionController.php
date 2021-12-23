@@ -110,7 +110,7 @@ class TransactionController extends Controller
         $transactionHeader->total_price = $totalPrice;
         $transactionHeader->purchase_date = new DateTime();
         $transactionHeader->save();
-//ada error disini jadi test dlu
+
         for($i = 0;$i<count($games);$i++){
             $transactionDetail = new TransactionDetail();
             $transactionDetail->price = $games[$i]->price;
@@ -129,6 +129,16 @@ class TransactionController extends Controller
             $transactionId = session()->get('transactionId');
             $transactionHeader = TransactionHeader::where('transaction_header_id', $transactionId)->first();
             return view('pages.transactionReceipt',['transactionHeader'=>$transactionHeader]);
+        }else{
+            return redirect('/');
+        }
+    }
+
+    public function showTransactionHistoryPage(){
+        if(Auth::user() && Auth::user()->role == 'member'){
+            $user = Auth::user();
+            $transactionHeaders = $user->transactionHeaders;
+            return view('pages.transactionHistory', ['transactionHeaders'=>$transactionHeaders]);
         }else{
             return redirect('/');
         }

@@ -63,3 +63,5 @@ Route::post('/friends', [FriendController::class, 'addFriend']);
 
 Route::put('/friendRequests/{friend_request_id}', [FriendController::class, 'acceptFriendRequest']);
 Route::delete('/friendRequests/{friend_request_id}', [FriendController::class, 'rejectFriendRequest']);
+
+Route::get('/transactionhistory', [TransactionController::class, 'showTransactionHistoryPage']);
