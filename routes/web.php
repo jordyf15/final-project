@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FriendController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -56,3 +57,9 @@ Route::put('/updateGame/{game_id}', [GameController::class, 'updateGame']);
 
 Route::get('/profile', [UserController::class, 'showProfilePage']);
 Route::put('/profile', [UserController::class, 'updateProfile']);
+
+Route::get('/friends',[FriendController::class, 'showFriendPage']);
+Route::post('/friends', [FriendController::class, 'addFriend']);
+
+Route::put('/friendRequests/{friend_request_id}', [FriendController::class, 'acceptFriendRequest']);
+Route::delete('/friendRequests/{friend_request_id}', [FriendController::class, 'rejectFriendRequest']);

@@ -69,7 +69,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                        <li><a class="dropdown-item" href="/friend">Friends</a></li>
+                        <li><a class="dropdown-item" href="/friends">Friends</a></li>
                         <li><a class="dropdown-item" href="/transactionhistory">Transaction History</a></li>
                         <li><a class="dropdown-item" href="/logout">Sign Out</a></li>
                     </ul>

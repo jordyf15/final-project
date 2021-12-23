@@ -9,6 +9,7 @@ class FriendRequest extends Model
 {
     use HasFactory;
     protected $table = 'friend_requests';
+    protected $primaryKey = 'friend_request_id';
 
     public function sender(){
         return $this->belongsTo(User::class,'sender_id','user_id');
