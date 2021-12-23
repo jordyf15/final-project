@@ -11,9 +11,9 @@ class GameLibraryDetail extends Model
     protected $table = 'game_library_details';
 
     public function game(){
-        return $this->hasOne(Game::class);
+        return $this->hasOne(Game::class,'game_id','game_id');
     }
     public function gameLibrary(){
-        return $this->belongsTo(GameLibrary::class);
+        return $this->belongsTo(GameLibrary::class,'library_id','library_id');
     }
 }

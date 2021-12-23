@@ -53,6 +53,9 @@ Route::delete('/game/{game_id}', [GameController::class, 'deleteGame']);
 
 Route::get('/updateGame/{game_id}', [GameController::class, 'showUpdateGamePage']);
 Route::put('/updateGame/{game_id}', [GameController::class, 'updateGame']);
+
+Route::get('/profile', [UserController::class, 'showProfilePage']);
+
 // Route::get('/gameAdult/{game_id}', [GameController::class, 'checkGameAdult']);
 // Route::get('/checkage/{game_id}', [UserController::class, 'showCheckAgePage']);
 // Route::post('/checkage/{game_id}', [UserController::class, 'checkAge']);

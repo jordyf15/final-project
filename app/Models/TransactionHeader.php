@@ -12,10 +12,10 @@ class TransactionHeader extends Model
     protected $primaryKey = 'transaction_header_id';
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id','user_id');
     }
 
     public function transactionDetails(){
-        return $this->hasMany(TransactionDetail::class);
+        return $this->hasMany(TransactionDetail::class,'transaction_header_id','transaction_header_id');
     }
 }

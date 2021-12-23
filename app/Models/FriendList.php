@@ -12,9 +12,9 @@ class FriendList extends Model
     protected $primaryKey = 'friend_list_id';
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id','user_id');
     }
     public function friendDetails(){
-        return $this->hasMany(FriendDetail::class);
+        return $this->hasMany(FriendDetail::class,'friend_list_id','friend_list_id');
     }
 }

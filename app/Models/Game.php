@@ -18,9 +18,5 @@ class Game extends Model
     public function gameLibraryDetails(){
         return $this->belongsToMany(GameLibraryDetail::class);
     }
-
-    public function cartDetails(){
-        return $this->belongsToMany(CartDetail::class);
-    }
     
 }

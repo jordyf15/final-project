@@ -41,21 +41,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function cart(){
-        return $this->hasOne(Cart::class);
-    }
     public function gameLibrary(){
-        return $this->hasOne(GameLibrary::class);
+        return $this->hasOne(GameLibrary::class,'user_id','user_id');
     }
     public function transactionHeaders(){
-        return $this->hasMany(TransactionHeader::class);
+        return $this->hasMany(TransactionHeader::class, 'user_id','user_id');
     }
     public function friendList(){
-        return $this->hasOne(FriendList::class);
+        return $this->hasOne(FriendList::class,'user_id','user_id');
     }
     public function friendDetail(){
-        return $this->hasOne(FriendDetail::class);
+        return $this->hasOne(FriendDetail::class,'friend_id','user_id');
     }
     public function friendRequests(){
         return $this->hasMany(FriendRequest::class);

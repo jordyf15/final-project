@@ -7,10 +7,10 @@ use App\Models\TransactionDetail;
 use App\Models\TransactionHeader;
 use App\Models\User;
 use App\Rules\CardNumberFormat;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -90,9 +90,6 @@ class TransactionController extends Controller
         $user = User::where('user_id',$user_id)->first();
         $user->level +=count($games);
         $user->save();
-
-        // ERROR!!!!!!!!
-        dd($user->gameLibrary);
         
         $gameLibrary = $user->gameLibrary;
         $totalPrice = 0;
@@ -111,9 +108,9 @@ class TransactionController extends Controller
         $transactionHeader->country = $cardCountry;
         $transactionHeader->zip_code = $zip;
         $transactionHeader->total_price = $totalPrice;
-        $transactionHeader->purchase_date = new Date();
+        $transactionHeader->purchase_date = new DateTime();
         $transactionHeader->save();
-
+//ada error disini jadi test dlu
         for($i = 0;$i<count($games);$i++){
             $transactionDetail = new TransactionDetail();
             $transactionDetail->price = $games[$i]->price;
@@ -122,7 +119,9 @@ class TransactionController extends Controller
             $transactionDetail->save();
         }
 
-        return redirect('/receipt')->with('transactionId',$transactionHeader->transaction_header_id);
+        $cookie = Cookie::make('cart'.$user_id, json_encode([]), 120);
+
+        return redirect('/receipt')->with('transactionId',$transactionHeader->transaction_header_id)->withCookie($cookie);
     }
 
     public function showTransactionReceiptPage(){

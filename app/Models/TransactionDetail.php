@@ -11,10 +11,10 @@ class TransactionDetail extends Model
     protected $table = 'transaction_details';
 
     public function transactionHeader(){
-        return $this->belongsTo(TransactionHeader::class);
+        return $this->belongsTo(TransactionHeader::class,'transaction_header_id','transaction_header_id');
     }
 
     public function game(){
-        return $this->hasOne(Game::class);
+        return $this->hasOne(Game::class,'game_id','game_id');
     }
 }

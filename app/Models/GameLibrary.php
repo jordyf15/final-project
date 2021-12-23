@@ -12,9 +12,9 @@ class GameLibrary extends Model
     protected $primaryKey = 'library_id';
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id','user_id');
     }
     public function gameLibraryDetails(){
-        return $this->hasMany(GameLibraryDetail::class);
+        return $this->hasMany(GameLibraryDetail::class,'library_id','library_id');
     }
 }

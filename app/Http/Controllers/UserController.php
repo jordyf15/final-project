@@ -72,7 +72,7 @@ class UserController extends Controller
             $user -> password = Hash::make($password);
             $user -> role = $request -> role;
             $user -> level = 1;
-            $user -> profile_picture = '/images/default_picture';
+            $user -> profile_picture = '';
             
             $user->save();
             
@@ -111,6 +111,10 @@ class UserController extends Controller
         }else{// dibawah 17 tahun
             return redirect('/')->withErrors('Sorry but this content is not appropriate for you');
         }
+    }
+
+    public function showProfilePage(){
+
     }
 
     // public function updateUser(Request $request, $user_id){

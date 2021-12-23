@@ -31,18 +31,32 @@
             <div id="game-price-container-left">
                 <div id="price-left">Buy {{$game->name}}</div>
             </div>
-            <div id="game-price-container-right">
-                <div id="price-right">
-                    @guest
+            @guest
+                <div id="game-price-container-right">
+                    <div id="price-right">
                         <a href="/login">Rp. {{$game->price}} | Add to cart</a>
-                    @endguest
-                    @auth
-                        @if (Auth::user() && Auth::user()->role == 'member')
-                            <a href='/cart/{{$game->game_id}}'>Rp. {{$game->price}} | Add to cart</a>
-                        @endif   
-                    @endauth
+                    </div>
                 </div>
-            </div>
+            @endguest
+            @auth
+                @php
+                    $own = false;
+                    $user_library = Auth::user()->gameLibrary;
+                    $user_games = $user_library->gameLibraryDetails;
+                    for($i = 0;$i<count($user_games);$i++){
+                        if($user_games[$i]->game_id==$game->game_id){
+                            $own = true;
+                        }
+                    }
+                @endphp
+                @if (Auth::user() && Auth::user()->role == 'member' && $own == false)
+                    <div id="game-price-container-right">
+                        <div id="price-right">
+                            <a href='/cart/{{$game->game_id}}'>Rp. {{$game->price}} | Add to cart</a>
+                        </div>
+                    </div>
+                @endif  
+            @endauth
         </div>
         <div id="detail-game-description">
             <div id="detail-game-description-title"><p>ABOUT THIS GAME</p></div>
