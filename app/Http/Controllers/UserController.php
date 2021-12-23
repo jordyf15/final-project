@@ -156,21 +156,4 @@ class UserController extends Controller
         $user->save();
         return redirect('/profile');
     }
-
-    // public function updateUser(Request $request, $user_id){
-    //     $user = User::where('user_id', $user_id)->first();
-        // $validation = Validator::make($request->all(),[
-        //     'fullname'=>['required'],
-        //     'current_password'=>['required', 'min:6','alpha_num'],
-        //     'new_password'=>['nullable','min:6','alpha_num'],
-        //     'confirm_new_password'=>['nullable','min:6','alpha_num','confirmed'],
-        //     'profile_picture'=>['nullable', 'mimes:jpg,png', 'max:100']
-        // ]);
-        // if($validation->fails()){
-        //     return back()->withErrors($validation->errors());
-        // }
-    //     $new_fullname = $request->fullname;
-    //     $new_password = $request->new_password;
-    //     $new_profile_picture = $request->profile_picture;
-    // }
 }

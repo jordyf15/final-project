@@ -10,7 +10,11 @@ class FriendRequest extends Model
     use HasFactory;
     protected $table = 'friend_requests';
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function sender(){
+        return $this->belongsTo(User::class,'sender_id','user_id');
+    }
+
+    public function receiver(){
+        return $this->belongsTo(User::class, 'receiver_id','user_id');
     }
 }

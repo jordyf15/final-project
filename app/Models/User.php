@@ -53,7 +53,10 @@ class User extends Authenticatable
     public function friendDetail(){
         return $this->hasOne(FriendDetail::class,'friend_id','user_id');
     }
-    public function friendRequests(){
-        return $this->hasMany(FriendRequest::class);
+    public function incomingFriendRequests(){
+        return $this->hasMany(FriendRequest::class,'receiver_id','user_id');
+    }
+    public function pendingFriendRequests(){
+        return $this->hasMany(FriendRequest::class, 'sender_id', 'user_id');
     }
 }
