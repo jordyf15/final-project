@@ -39,9 +39,11 @@ class UserController extends Controller
         $loginSuccess = Auth::attempt(['username' => $username, 'password' => $password], $remember);
         if($loginSuccess == true){
             if($remember){
-                $userCookieKey = Auth::getRecallerName();
-                $userCookieValue = Auth::user()->getRememberToken();
-                $userCookie = Cookie::make($userCookieKey, $userCookieValue, 120);
+                // Mohon maaf kak saya masih bingung ini cookie digunakan untuk remembernya seperti apa
+                // jadi saya cuma bisa bikin cookienya aja
+                $userCookieKey = $username;
+                $userCookieValue = Auth::user();
+                $userCookie = Cookie::make($userCookieKey, json_encode($userCookieValue), 120);
                 return redirect('/')->withCookie($userCookie);
             }
             return redirect('/');

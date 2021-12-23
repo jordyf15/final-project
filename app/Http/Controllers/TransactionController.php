@@ -21,8 +21,13 @@ class TransactionController extends Controller
         if(Auth::user() && Auth::user()->role == 'member'){
             $user_id = Auth::user()->user_id;
             $cookie = Cookie::get('cart'.$user_id);
-            $game_ids = json_decode($cookie);
-            $games = Game::whereIn('game_id',$game_ids)->get();
+            $games=[];
+            if($cookie){
+                $game_ids = json_decode($cookie);
+                if(count($game_ids)>0){
+                    $games = Game::whereIn('game_id',$game_ids)->get();
+                }
+            }
             return view('pages.shoppingcart', ['games'=>$games]);
         }else{
             return redirect('/');
@@ -90,7 +95,7 @@ class TransactionController extends Controller
         $user_id = Auth::user()->user_id;
         $cookie = Cookie::get('cart'.$user_id);
         $game_ids = json_decode($cookie);
-        
+
         $games = Game::whereIn('game_id',$game_ids)->get();
         $user = User::where('user_id',$user_id)->first();
         $user->level +=count($games);
