@@ -49,5 +49,8 @@
         @endforeach
     @endif
     </form>
+    @if(session()->has('successMessage'))
+        <p>{{session()->get('successMessage')}}</p>
+    @endif
 </div>
 @endsection

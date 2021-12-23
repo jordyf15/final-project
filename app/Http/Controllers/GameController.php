@@ -207,6 +207,6 @@ class GameController extends Controller
        }
 
        $game->save();
-       return redirect('/manageGame');
+       return redirect('/manageGame')->with('successMessage','Game updated successfully');
     }
 }
