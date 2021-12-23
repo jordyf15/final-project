@@ -97,3 +97,48 @@
     background-color: rgb(191, 205, 218);
     /* margin-bottom: 20px; */
 }
+
+#shoppingcart-popup-bg{
+    background-color: rgba(200, 200, 200, 0.705);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#shoppingcart-popup{
+    background-color: white;  
+    padding: 25px;
+    max-width: 40%;
+    border-radius: 10px;
+}
+
+#shoppingcart-popup-heading{
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+#shoppingcart-popup-button-container{
+    text-align: right;
+}
+
+#shoppingcart-delete-btn{
+    background-color: #dc2626;
+    border:none;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 7px;
+}
+
+#shoppingcart-cancel-btn{
+    background-color: white;
+    border: 3px solid grey;
+    box-sizing: border-box;
+    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 7px;
+}

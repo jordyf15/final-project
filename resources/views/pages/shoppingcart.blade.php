@@ -56,13 +56,6 @@
             </div>
         </div>
         <div id="shoppingcart-popup-container">
-            {{-- <div id='shoppingcart-popup-bg'>
-                <div id='shoppingcart-popup'>
-                    <p id='shoppingcart-popup-heading'>Delete Cart</p>
-                    <p id='shoppingcart-popup-content'>Are you sure you want to delete this game from your shopping cart? All of your data will be permanently removed. This action cannot be undone.</p>
-            
-                </div>
-            </div> --}}
         </div>
         <script>
             function renderPopup(game_id){
@@ -93,10 +86,15 @@
                     <form action="/cart/${game_id}" id='shoppingcart-popup-button-container' method='POST'>
                         @csrf
                         @method('DELETE')
+                        <button id="shoppingcart-cancel-btn" type="button">Cancel</button>
                         <button type='submit' id="shoppingcart-delete-btn">Delete</button>
-                        <button id="shoppingcart-cancel-btn">Cancel</button>
                     </form>
                 `;
+
+                const cancelBtn = document.querySelector('#shoppingcart-cancel-btn');
+                cancelBtn.addEventListener('click', ()=>{
+                    popupContainer.removeChild(popupBg);
+                });
             }
         </script>
     </div>
