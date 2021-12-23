@@ -5,6 +5,8 @@ main
 #main-container
 {
     padding: 10px;
+    background-color: #d1d5db;
+    height: 76vh;
 }
 #main-title
 {

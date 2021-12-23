@@ -1,0 +1,67 @@
+#checkage-container
+{
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    align-items: center;
+    background-color: #d1d5db;
+    height: 76vh;
+}
+#checkage-detail-container
+{
+    display: flex;
+    flex-direction: column;
+    padding-left: 300px;
+    padding-right: 300px;
+    align-items: center;
+}
+#checkage-game-cover img
+{
+    height: 170px;
+    width: 300px;
+}
+#checkage-game-title
+{
+    margin-top: 20px;
+}
+#checkage-game-title p
+{
+    text-align: center;
+    color: #374151;
+    font-weight: bolder;
+    font-size: 24px;
+}
+#checkage-game-form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.712);
+    border-radius: 5px;
+}
+#checkage-game-container
+{
+    padding-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#checkage-button-container
+{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+#checkage-button-view
+{
+    background-color: #374151;
+    color: white;
+}
+#checkage-button-cancel
+{
+    background-color: white;
+    color: #374151;
+    margin-left: 20px;
+}
