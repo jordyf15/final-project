@@ -1,0 +1,26 @@
+#profileLayout-main{
+    background-color: #d1d5db;
+    padding: 30px;
+    color: #384050;
+}
+
+#profileLayout-container{
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    border-radius: 15px;
+}
+#side-tab{
+    display: flex;
+    flex-direction: column;
+    padding-right: 150px;
+    border-right: 2px solid grey;
+    margin-right: 20px;
+}
+
+#side-tab a{
+    text-decoration: none;
+    font-weight: bold;
+    color: #384050;
+    margin-bottom: 15px;
+}
