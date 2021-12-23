@@ -92,20 +92,20 @@ class GameController extends Controller
     }
 
     public function addCart($game_id){
-        $game = Game::where('game_id', $game_id)->first();
+        // $game = Game::where('game_id', $game_id)->first();
         $user_id = Auth::user()->user_id;
         $cookie = Cookie::get('cart'.$user_id);
         if(!$cookie){
-            $cookie = Cookie::make('cart'.$user_id, json_encode([$game]), 120);
+            $cookie = Cookie::make('cart'.$user_id, json_encode([$game_id]), 120);
         }else{
             $carts = json_decode($cookie);
             // dd($carts);
-            foreach($carts as $gameCart){
-                if($gameCart->game_id == $game_id){
+            foreach($carts as $cart_game_id){
+                if($cart_game_id == $game_id){
                     return back()->withErrors('The game already in your cart')->with(['safe'=>true]);
                 }
             }
-            array_push($carts, $game);
+            array_push($carts, $game_id);
             Cookie::forget('cart'.$user_id);
             $cookie = Cookie::make('cart'.$user_id, json_encode($carts), 120);
         }

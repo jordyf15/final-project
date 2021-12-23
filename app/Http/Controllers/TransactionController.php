@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\GameLibraryDetail;
 use App\Models\TransactionDetail;
 use App\Models\TransactionHeader;
@@ -20,7 +21,8 @@ class TransactionController extends Controller
         if(Auth::user() && Auth::user()->role == 'member'){
             $user_id = Auth::user()->user_id;
             $cookie = Cookie::get('cart'.$user_id);
-            $games = json_decode($cookie);
+            $game_ids = json_decode($cookie);
+            $games = Game::whereIn('game_id',$game_ids)->get();
             return view('pages.shoppingcart', ['games'=>$games]);
         }else{
             return redirect('/');
@@ -31,15 +33,15 @@ class TransactionController extends Controller
         if(Auth::user() && Auth::user()->role == 'member'){
             $user_id = Auth::user()->user_id;
             $cookie = Cookie::get('cart'.$user_id);
-            $games = json_decode($cookie);
+            $game_ids = json_decode($cookie);
             $deletedIndex = null;
-            for($i = 0; $i<count($games);$i++){
-                if($games[$i]->game_id==$game_id){
+            for($i = 0; $i<count($game_ids);$i++){
+                if($game_ids[$i]==$game_id){
                     $deletedIndex = $i;
                 }
             }
-            array_splice($games, $deletedIndex, 1);
-            $cookie = Cookie::make('cart'.$user_id, json_encode($games), 120);
+            array_splice($game_ids, $deletedIndex, 1);
+            $cookie = Cookie::make('cart'.$user_id, json_encode($game_ids), 120);
             return back()->withCookie($cookie);
         }else{
             return redirect('/');
@@ -51,10 +53,11 @@ class TransactionController extends Controller
             $user_id = Auth::user()->user_id;
             $cookie = Cookie::get('cart'.$user_id);
             if($cookie){
-                $games = json_decode($cookie);
-                if(count($games)==0){
+                $game_ids = json_decode($cookie);
+                if(count($game_ids)==0){
                     return redirect('/cart');
                 }else{
+                    $games = Game::whereIn('game_id',$game_ids)->get();
                     return view('pages.transactionInformation', ['games'=>$games]);
                 }
             }else{
@@ -86,7 +89,9 @@ class TransactionController extends Controller
 
         $user_id = Auth::user()->user_id;
         $cookie = Cookie::get('cart'.$user_id);
-        $games = json_decode($cookie);
+        $game_ids = json_decode($cookie);
+        
+        $games = Game::whereIn('game_id',$game_ids)->get();
         $user = User::where('user_id',$user_id)->first();
         $user->level +=count($games);
         $user->save();
