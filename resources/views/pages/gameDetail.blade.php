@@ -64,9 +64,18 @@
             <div id="detail-game-description-desc"><p>{{$game->description_long}}</p></div>
         </div>
         @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                {{$error}}
-            @endforeach
+            <div id="game-detail-error-container">
+                <div id="game-detail-show-error">
+                    <div id="game-detail-show-error-title">
+                        There were error with your submission
+                    </div>
+                    <div id="game-detail-show-error-desc">
+                        @foreach ($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         @endif
     </div>
 </main>
