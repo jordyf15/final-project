@@ -34,6 +34,9 @@
                 </div>
             </div>
         @endif
+        @if(session()->has('successMessage'))
+            <p>{{session()->get('successMessage')}}</p>
+        @endif
     </div>
 </main>
 @endsection

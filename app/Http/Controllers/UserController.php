@@ -84,7 +84,8 @@ class UserController extends Controller
             $friendList->user_id = $user->user_id;
             $friendList->save();
 
-            return redirect('/');
+            Auth::attempt(['username'=>$request->username,'password'=>$request->password]);
+            return redirect('/')->with('successMessage','Account successfully registered.');
         }
     }
 

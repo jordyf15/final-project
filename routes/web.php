@@ -24,9 +24,7 @@ Route::post('/register', [UserController::class, 'register']);
 Route::get('/login', [UserController::class, 'showLoginForm']);
 Route::post('/login', [UserController::class, 'login']);
 
-// ini rada sama kyk kakaknya jadi cek in lagi nanti
 Route::get('/logout', [UserController::class, 'logout'])->middleware('auth');
-
 
 Route::get('/createGame',[GameController::class, 'showCreateGamePage']);
 Route::post('/createGame',[GameController::class, 'createGame']);
