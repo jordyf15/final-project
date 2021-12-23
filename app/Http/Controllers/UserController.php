@@ -114,41 +114,63 @@ class UserController extends Controller
     }
 
     public function showProfilePage(){
+        if(Auth::user()){
+            $user = Auth::user();
+            return view('pages.profile', ['user'=>$user]);
+        }else{
+            return redirect('/');
+        }
+    }
 
+    public function updateProfile(Request $request){
+        $user = Auth::user();
+        $user = User::where('user_id',$user->user_id)->first();
+        $validation = Validator::make($request->all(),[
+            'fullname'=>['required'],
+            'currentPassword'=>['required', 'min:6','alpha_num'],
+            'newPassword'=>['nullable','min:6','alpha_num','confirmed'],
+            'newPassword_confirmation'=>['nullable','min:6','alpha_num'],
+            'photo'=>['nullable', 'mimes:jpg,png', 'max:100']
+        ]);
+        if($validation->fails()){
+            return back()->withErrors($validation->errors());
+        }
+        $fullname = $request->fullname;
+        $currentPassword = $request->currentPassword;
+        $newPassword = $request->newPassword;
+        $photo = $request->photo;
+        if(!Hash::check($currentPassword, $user->password)){
+            return back()->withErrors([
+                'password' => 'The password is incorrect'
+            ]);
+        }   
+        $user->fullname = $fullname;
+        if($newPassword){
+            $hashedNewPassword = Hash::make($newPassword);
+            $user->password = $hashedNewPassword;
+        }
+        if($photo){
+            $pathProfilePicture = $request->file('photo')->store('/public/images');
+            $user->profile_picture = $pathProfilePicture;
+        }
+        $user->save();
+        return redirect('/profile');
     }
 
     // public function updateUser(Request $request, $user_id){
     //     $user = User::where('user_id', $user_id)->first();
-    //     $validation = Validator::make($request->all(),[
-    //         'fullname'=>['required'],
-    //         'current_password'=>['required', 'min:6','alpha_num'],
-    //         'new_password'=>['nullable','min:6','alpha_num'],
-    //         'confirm_new_password'=>['nullable','min:6','alpha_num','confirmed'],
-    //         'profile_picture'=>['nullable', 'mimes:jpg,png', 'max:100']
-    //     ]);
-    //     if($validation->fails()){
-    //         return back()->withErrors($validation->errors());
-    //     }
+        // $validation = Validator::make($request->all(),[
+        //     'fullname'=>['required'],
+        //     'current_password'=>['required', 'min:6','alpha_num'],
+        //     'new_password'=>['nullable','min:6','alpha_num'],
+        //     'confirm_new_password'=>['nullable','min:6','alpha_num','confirmed'],
+        //     'profile_picture'=>['nullable', 'mimes:jpg,png', 'max:100']
+        // ]);
+        // if($validation->fails()){
+        //     return back()->withErrors($validation->errors());
+        // }
     //     $new_fullname = $request->fullname;
     //     $new_password = $request->new_password;
     //     $new_profile_picture = $request->profile_picture;
-    // }
-
-    // public function showCheckAgePage($game_id){
-    //     $game = Game::where('game_id',$game_id)->first();
-    //     return view('checkAge', ['game'=>$game]);
-    // }
-
-    // public function checkAge(Request $request, $game_id){
-    //     $dob = new DateTime($request->dob);
-    //     $now = new DateTime();
-    //     $dayDiff = $now->diff($dob)->format('%a');
-    //     // 17 tahun == 6209.25 hari
-    //     if($dayDiff>=6209.25){//dia 17 tahun keatas
-    //         return redirect('/game/'.$game_id);
-    //     }else{// dibawah 17 tahun
-    //         return redirect('/home');
-    //     }
-    //     dd($dayDiff);
     // }
 }

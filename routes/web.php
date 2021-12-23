@@ -55,13 +55,4 @@ Route::get('/updateGame/{game_id}', [GameController::class, 'showUpdateGamePage'
 Route::put('/updateGame/{game_id}', [GameController::class, 'updateGame']);
 
 Route::get('/profile', [UserController::class, 'showProfilePage']);
-
-// Route::get('/gameAdult/{game_id}', [GameController::class, 'checkGameAdult']);
-// Route::get('/checkage/{game_id}', [UserController::class, 'showCheckAgePage']);
-// Route::post('/checkage/{game_id}', [UserController::class, 'checkAge']);
-// Route::get('/game/{game_id}', [GameController::class, 'gameDetail']);
-
-// Route::get('/manageGame', [GameController::class, 'manageGamePage']);
-// Route::get('/updateGame/{game_id}', [GameController::class, 'updateGamePage']);
-// Route::post('/updateGame/{game_id}', [GameController::class, 'updateGame']);
-// Route::delete('/game/{game_id}', [GameController::class, 'deleteGame']);
+Route::put('/profile', [UserController::class, 'updateProfile']);

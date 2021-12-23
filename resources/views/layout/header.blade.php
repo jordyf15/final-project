@@ -38,7 +38,13 @@
         <div id="auth" class="dropdown">
             @auth
                 @if(Auth::user()->role == 'admin')
-                <button data-bs-toggle="dropdown" type="button" id="btn"><img src="/images/profile.png" alt=""></button>
+                <button data-bs-toggle="dropdown" type="button" id="btn">
+                    @if(Auth::user()->profile_picture == '')
+                        <img src={{asset('/images/profile.png')}} alt="profile picture">
+                    @else
+                        <img src={{Storage::url(Auth::user()->profile_picture)}} alt="profile picture">
+                    @endif
+                </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/profile">Profile</a></li>
                     <li><a class="dropdown-item" href="/logout">Sign Out</a></li>
@@ -54,7 +60,13 @@
                     <a href='/cart'><img src="/images/cart.png" alt=""></a>
                 </div>
                 <div id="dropdown" class="dropdown">
-                    <button data-bs-toggle="dropdown" type="button" id="btn"><img src="/images/profile.png" alt=""></button>
+                    <button data-bs-toggle="dropdown" type="button" id="btn">
+                        @if(Auth::user()->profile_picture == '')
+                            <img src={{asset('/images/profile.png')}} alt="profile picture">
+                        @else
+                            <img src={{Storage::url(Auth::user()->profile_picture)}} alt="profile picture">
+                        @endif
+                    </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/profile">Profile</a></li>
                         <li><a class="dropdown-item" href="/friend">Friends</a></li>
