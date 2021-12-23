@@ -76,7 +76,7 @@ class GameController extends Controller
         $game->release_date = new DateTime();
 
         $game->save();
-        return redirect('/manageGame');
+        return redirect('/manageGame')->with('successMessage','Game successfully added.');
     }
 
     public function searchGame(Request $request){
@@ -106,6 +106,7 @@ class GameController extends Controller
                 }
             }
             array_push($carts, $game);
+            Cookie::forget('cart'.$user_id);
             $cookie = Cookie::make('cart'.$user_id, json_encode($carts), 120);
         }
 

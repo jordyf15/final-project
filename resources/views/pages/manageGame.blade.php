@@ -71,6 +71,9 @@
     @endif
     <div id="managegame-popup-container"></div>
     <a href="/createGame">Create Game</a>
+    @if(session()->has('successMessage'))
+        <p>{{session()->get('successMessage')}}</p>
+    @endif
     <script>
         function renderPopup(game_id){
             const popupContainer = document.querySelector('#managegame-popup-container');
