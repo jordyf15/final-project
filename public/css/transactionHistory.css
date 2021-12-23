@@ -1,0 +1,19 @@
+.history-items{
+    padding: 10px 0;
+    border: 2px solid grey;
+    border-left: none;
+    border-right: none;
+}
+
+.history-ids{
+    margin-bottom: 0;
+}       
+
+.history-totals{
+    font-weight: bold;
+    font-size: 22px;
+}
+
+#history-side{
+    flex-grow: 1;
+}
