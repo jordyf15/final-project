@@ -7,7 +7,7 @@
                 <a href="/profile">Profile</a>
                 @if (Auth::user()->role == 'member')
                     <a href="/friends">Friends</a>
-                    <a href="/transactionHistory">Transaction History</a>
+                    <a href="/transactionhistory">Transaction History</a>
                 @endif   
             @endauth
         </div>
