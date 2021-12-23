@@ -1,0 +1,39 @@
+#receipt-main{
+    background-color: #d1d5db;
+    padding: 30px;
+    color: #384050;
+}
+
+#receipt-container{
+    background-color: white;
+    padding: 15px;
+}
+
+#receipt-id{
+    margin-bottom: 0;
+}
+
+.receipt-items{
+    display: flex;
+    border: 1px solid grey;
+    padding: 10px 0;
+    border-left: none;
+    border-right: none;
+}
+
+.receipt-items-texts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 30px;
+}
+
+.receipt-items-names{
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+#receipt-total{
+    font-weight: bold;
+    font-size: 22px;
+}
