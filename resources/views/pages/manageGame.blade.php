@@ -1,14 +1,15 @@
 @extends('layout.layout')
 @section('content')
-<h1>Manage Games</h1>
-    <form action="/manageGame" method="POST">
+<main id='managegame-main'>
+    <h1>Manage Games</h1>
+    <form action="/manageGame" method="POST" id='managegame-form-filter'>
         @csrf
-        <div>
-            <label for="filterName">Filter by Games Name</label>
-            <input type="search" id="filterName" name="filterName">
-        </div>  
-        <div>
-            <p>Filter by Games Category</p>
+        <div id='managegame-filtername-container'>
+            <label for="filterName" id='managegame-filtername-label'>Filter by Games Name</label><br>
+            <input type="search" id="filterName" name="filterName">  <button type="submit" id='managegame-search-button'>Search</button>
+        </div>
+        <p id='managegame-categories-title'>Filter by Games Category</p>
+        <div id='managegame-categories-container'>
             <span>
                 <input type="checkbox" id='filterIdle' name="filterIdle">
                 <label for="filterIdle">Idle</label>
@@ -46,34 +47,43 @@
                 <label for="filterSimulation">Simulation</label>
             </span>
         </div>
-        <button type="submit">Search</button>
+        <a id='managegame-creategame' href="/createGame">Create Game</a>
     </form>
     @if (count($games)>0)
-        <div>
+        <div id='managegame-gamecontainer'>
             @for($i=0;$i<count($games);$i++)
-            <div>
-                <div>
+            <div id='managegame-games'>
+                <div id='managegame-games-info'>
                     <a href="/game/{{$games[$i]->game_id}}">
-                        <img src={{Storage::url($games[$i]->cover)}} alt={{$games[$i]->name}}>
+                        <img id='managegame-images' src={{Storage::url($games[$i]->cover)}} alt={{$games[$i]->name}}>
                     </a>
-                    <div>
-                        <div>{{$games[$i]->name}}</div>
+                    <div id='managegame-games-texts'>
+                        <div id='manage-games-texts-title'>{{$games[$i]->name}}</div>
                         <div>{{$games[$i]->category}}</div>
                     </div>
                 </div>
-                <a href="/updateGame/{{$games[$i]->game_id}}">Update</a>
-                <button onClick="renderPopup('{{$games[$i]->game_id}}')">Delete</button>
+                <a id='managegame-games-update' href="/updateGame/{{$games[$i]->game_id}}">Update</a>
+                <button id="managegame-games-delete" onClick="renderPopup('{{$games[$i]->game_id}}')">Delete</button>
             </div>
             @endfor
+        </div>
+        <div id="managegame-pagination-container">
+            {{$games->withQueryString()->links()}}
         </div>
     @else
         <p>There are no games content can be showed right now.</p>
     @endif
     <div id="managegame-popup-container"></div>
-    <a href="/createGame">Create Game</a>
     @if(session()->has('successMessage'))
-        <p>{{session()->get('successMessage')}}</p>
+    <div id="game-detail-success-container">
+        <div id="game-detail-show-success">
+            <div id="game-detail-success-content">
+                <p>{{session()->get('successMessage')}}</p>
+            </div>
+        </div>
+    </div>
     @endif
+</main>
     <script>
         function renderPopup(game_id){
             const popupContainer = document.querySelector('#managegame-popup-container');
@@ -103,10 +113,14 @@
                 <form action="/game/${game_id}" id='managegame-popup-button-container' method='POST'>
                     @csrf
                     @method('DELETE')
-                    <button type='submit' id="managegame-delete-btn">Delete</button>
                     <button type='button' id="managegame-cancel-btn">Cancel</button>
+                    <button type='submit' id="managegame-delete-btn">Delete</button>
                 </form>
             `;
+            const cancelBtn = document.querySelector('#managegame-cancel-btn');
+            cancelBtn.addEventListener('click',()=>{
+                popupContainer.removeChild(popupBg);
+            });
         }
     </script>
 @endsection
