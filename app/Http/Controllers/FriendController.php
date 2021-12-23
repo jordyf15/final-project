@@ -26,6 +26,7 @@ class FriendController extends Controller
     }
 
     public function addFriend(Request $request){
+        // gk boleh add diri sendiri
         $user = Auth::user();
         $friendUsername = $request->username;
         $friend = User::where('username', $friendUsername)->first();

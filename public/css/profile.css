@@ -1,0 +1,119 @@
+
+#profile-side{
+    flex-grow:1;
+}
+#profile-form-outer-container{
+    display: flex;
+}
+
+#profile-form-inner-container-left{
+    display: flex;
+    padding-right: 20px;
+}
+#profile-form-inner-container-right{
+    padding-right: 20px;
+}
+
+#profile-form-outer-container-left{
+    display:flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding: 40px 0;
+}
+
+#profile-form-outer-container-right label{
+    font-weight: bold;
+    color: #706b74;
+    margin-bottom: 10px;
+}
+.profile-input-photo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:3;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+}
+#profile-photo-container{
+    position: relative;
+}
+
+#profile-form-username-container{
+    /* background-color: orangered; */
+    width: 70%;
+}
+
+#profile-form-username-label{
+    font-weight: bold;
+    color: #706b74;
+    margin-bottom: 2px;
+}
+
+#profile-form-username-input{
+    border: 2px solid grey;
+    padding: 0 10px 5px;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+#profile-form-level-container{
+    width: 30%;
+}
+
+#profile-form-level-label{
+    font-weight: bold;
+    color: #706b74;
+    margin-bottom: 2px;
+}
+
+#profile-form-level-input{
+    border: 2px solid grey;
+    padding: 0 10px 5px;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+#profile-form-fullname-label{
+    font-weight: bold;
+    color: #706b74;
+    margin-bottom: 2px;
+}
+
+.profile-form-fullname-input{
+    border: 2px solid grey;
+    padding: 0 10px 5px;
+    border-radius: 5px;
+    margin-right: 15px;
+    width: 100%;
+}
+
+#profile-currentpassword-container label, #profile-newpassword-container label, #profile-confirmpassword-container label{
+    font-weight: bold;
+    color: #706b74;
+    margin-bottom: 2px;
+}
+#profile-currentpassword-container input, #profile-newpassword-container input, #profile-confirmpassword-container input{
+    display: block;
+    border: 2px solid grey;
+    padding: 0 10px 5px;
+    border-radius: 5px;
+    margin-right: 15px;
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+#profile-button-container{
+    text-align: right;
+    
+}
+
+#profile-button-container button{
+    background-color: #4b5563;
+    color: white;
+    font-weight: bold;
+    border:none;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
