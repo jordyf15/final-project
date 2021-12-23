@@ -35,7 +35,13 @@
             </div>
         @endif
         @if(session()->has('successMessage'))
-            <p>{{session()->get('successMessage')}}</p>
+        <div id="game-detail-success-container">
+            <div id="game-detail-show-success">
+                <div id="game-detail-success-content">
+                    <p>{{session()->get('successMessage')}}</p>
+                </div>
+            </div>
+        </div>
         @endif
     </div>
 </main>
