@@ -1,13 +1,21 @@
 @extends('layout.profileLayout')
 @section('page')
     <div>
-        <h2>Friends</h2>
-        <div>
+        <div id="friend-title" class="mb-3">
+            <h2>Friends</h2>
+        </div>
+        <div class="mb-3">
             <form action="/friends" method='POST'>
                 @csrf
                 <h3>Add Friend</h3>
-                <input type="text" name="username" id="username" placeholder="Username">
-                <button type="submit">Add</button>
+                <div id="friend-form">
+                    <div>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+                    </div>
+                    <div id="friend-add-btn">
+                        <button class="btn" id="add-btn" type="submit">Add</button>
+                    </div>
+                </div>
                 @if ($errors->any())
                     @foreach ($errors->all() as $error)
                         {{$error}}

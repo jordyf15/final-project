@@ -1,0 +1,27 @@
+
+#friend-title h2
+{
+    color:#3e495d;
+    font-size: 20px;
+}
+h3
+{
+    color:#3e495d;
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+#friend-form
+{
+    display: flex;
+    flex-direction: row;
+}
+#friend-add-btn
+{
+    margin-left: 20px;
+    background-color: #3e495d;
+    border-radius: 5px;
+}
+#add-btn
+{
+    color: white;
+}
