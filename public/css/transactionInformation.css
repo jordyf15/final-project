@@ -1,0 +1,66 @@
+#transact-info-container
+{
+    background-color: #d1d5db;
+    min-height: 76vh;
+}
+#transact-bot
+{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#card-detail
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#card-detail-1
+{
+    width: 69%;
+}
+#card-detail-2
+{
+    width: 29%;
+}
+#country-detail
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#country-detail-1
+{
+    width: 69%;
+}
+#country-detail-2
+{
+    width: 29%;
+}
+#transact-total-price
+{
+    margin-bottom: 10px;
+    /* padding-left: 20px;
+    padding-bottom: 10px; */
+}
+#transact-total-price p
+{
+    margin-bottom: 0 !important;
+}
+#transact-total-price span
+{
+    font-weight: bold;
+    color:  #29303b;
+}
+#transact-cancel-btn
+{
+    background-color: rgb(255, 255, 255);
+    color:   #29303b;
+    border-radius: 5px;
+}
+#transact-checkout-btn
+{
+    margin-left: 10px;
+    color:   #29303b;
+    border-radius: 5px;
+    background-color: rgba(182, 182, 182, 0.932);
+}
