@@ -109,7 +109,7 @@ class GameController extends Controller
             $cookie = Cookie::make('cart'.$user_id, json_encode($carts), 120);
         }
 
-        return back()->withCookie($cookie)->with(['safe'=>true]);
+        return back()->withCookie($cookie)->with(['safe'=>true,'successMessage'=>'Game successfully added to Cart']);
     }
 
     public function showManageGamePage(){
