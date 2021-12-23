@@ -7,7 +7,7 @@
         <div class="mb-3">
             <form action="/friends" method='POST'>
                 @csrf
-                <h3>Add Friend</h3>
+                <h3 id="friend-title">Add Friend</h3>
                 <div id="friend-form">
                     <div>
                         <input type="text" class="form-control" name="username" id="username" placeholder="Username">
@@ -24,7 +24,7 @@
             </form>
         </div>
         <div>
-            <h3>Incoming Friend Request</h3>
+            <h3 id="friend-title">Incoming Friend Request</h3>
             @if(count($incomingFriendRequest)==0)
                 <p>There is no incoming friend request</p>
             @else
@@ -52,7 +52,7 @@
             @endif
         </div>
         <div>
-            <h3>Pending Friend Request</h3>
+            <h3 id="friend-title">Pending Friend Request</h3>
             @if(count($pendingFriendRequest)==0)
                 <p>There is no pending friend request</p>
             @else
@@ -76,7 +76,7 @@
             @endif
         </div>
         <div>
-            <h3>Your Friends</h3>
+            <h3 id="friend-title">Your Friends</h3>
             @if(count($friendDetails)==0)
                 <p>There is no friend</p>
             @else
