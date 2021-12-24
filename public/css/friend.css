@@ -1,4 +1,6 @@
-
+#friend-side{
+    flex-grow: 1;
+}
 #friend-title h2
 {
     color:#3e495d;
@@ -24,4 +26,75 @@
 #add-btn
 {
     color: white;
+}
+
+#incomingfriendrequests-container, #pendingfriendrequests-container, #friends-container{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.incomingfriendrequests-items, .pendingfriendrequests-items{
+    background-color: #f9fafb;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.31);
+}
+
+.incomingfriendrequests-items-top, .pendingfriendrequests-items-top{
+    display:flex;
+    padding: 20px;
+}
+
+.friends-items{
+    background-color: #f9fafb;
+    display: flex;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.31);
+    padding: 20px;
+}
+
+.incomingfriendrequests-items-top-left, .pendingfriendrequests-items-top-left, .friends-items-left{
+    flex-grow: 1;
+}
+.incomingfriendrequests-items-top-left p, .pendingfriendrequests-items-top-left p, .friends-items-left p{
+    margin-bottom: 0;
+}
+
+.incomingfriendrequests-items-bottom, .pendingfriendrequests-items-bottom{
+    display:flex;
+}
+
+.incomingfriendrequests-item-profpic, .pendingfriendrequests-item-profpic, .friends-items-profpic{
+    width: 50px;
+    height: 50px
+}
+
+.incomingfriendrequests-item-username, .pendingfriendrequests-item-username, .friends-items-username{
+    font-weight: bold;
+    color: #3e495d;
+}
+
+.incomingfriendrequests-item-level, .pendingfriendrequests-item-level, .friends-items-level{
+    background-color: #d1fae5;
+    padding: 5px 10px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+
+.incomingfriendrequests-items-bottom form, .pendingfriendrequests-items-bottom form{
+    width: 100%;
+    border-top: 1px solid grey;
+}
+
+.incomingfriendrequests-items-bottom form button, .pendingfriendrequests-items-bottom form button{
+    width: 100%;
+    padding: 10px 0;
+    border:none;
+    background-color: #f9fafb;
+}
+
+.incomingfriendrequests-items-bottom-accept{
+    border-right: 1px solid grey !important;
 }

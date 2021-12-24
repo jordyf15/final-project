@@ -1,6 +1,6 @@
 @extends('layout.profileLayout')
 @section('page')
-    <div>
+    <div id='friend-side'>
         <div id="friend-title" class="mb-3">
             <h2>Friends</h2>
         </div>
@@ -17,9 +17,18 @@
                     </div>
                 </div>
                 @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                        {{$error}}
-                    @endforeach
+                    <div id="game-detail-error-container">
+                        <div id="game-detail-show-error">
+                            <div id="game-detail-show-error-title">
+                                There were error with your submission
+                            </div>
+                            <div id="game-detail-show-error-desc">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </form>
         </div>
@@ -28,27 +37,35 @@
             @if(count($incomingFriendRequest)==0)
                 <p>There is no incoming friend request</p>
             @else
+            <div id='incomingfriendrequests-container'>
                 @for($i=0;$i<count($incomingFriendRequest);$i++)
-                    <div>
-                        <p>{{$incomingFriendRequest[$i]->sender->username}} {{$incomingFriendRequest[$i]->sender->level}}</p>
-                        @if($incomingFriendRequest[$i]->sender->profile_picture == '')
-                            <img src={{asset('/images/profile.png')}} alt="profile picture">
-                        @else
-                            <img src={{Storage::url($incomingFriendRequest[$i]->sender->profile_picture)}} alt="{{$incomingFriendRequest[$i]->sender->username}}'s profile picture">
-                        @endif
-                        <p>{{$incomingFriendRequest[$i]->sender->role}}</p>
+                    <div class='incomingfriendrequests-items'>
+                        <div class='incomingfriendrequests-items-top'>
+                            <div class='incomingfriendrequests-items-top-left'>
+                                <p class='incomingfriendrequests-item-username'>{{$incomingFriendRequest[$i]->sender->username}} <span class='incomingfriendrequests-item-level'>{{$incomingFriendRequest[$i]->sender->level}}</span></p>
+                                <p>{{$incomingFriendRequest[$i]->sender->role}}</p>
+                            </div>
+                            @if($incomingFriendRequest[$i]->sender->profile_picture == '')
+                                <img class='incomingfriendrequests-item-profpic' src={{asset('/images/profile.png')}} alt="profile picture">
+                            @else
+                                <img class='incomingfriendrequests-item-profpic' src={{Storage::url($incomingFriendRequest[$i]->sender->profile_picture)}} alt="{{$incomingFriendRequest[$i]->sender->username}}'s profile picture">
+                            @endif
+                        </div>
+                        <div class='incomingfriendrequests-items-bottom'>
                             <form action="/friendRequests/{{$incomingFriendRequest[$i]->friend_request_id}}" method="POST">
                                 @csrf
                                 @method('PUT')
-                                <button type="submit">Accept</button>
+                                <button class='incomingfriendrequests-items-bottom-accept' type="submit">Accept</button>
                             </form>
                             <form action="/friendRequests/{{$incomingFriendRequest[$i]->friend_request_id}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">Reject</button>
                             </form>
+                        </div>
                     </div>
                 @endfor
+            </div>
             @endif
         </div>
         <div>
@@ -56,23 +73,31 @@
             @if(count($pendingFriendRequest)==0)
                 <p>There is no pending friend request</p>
             @else
+            <div id='pendingfriendrequests-container'>
                 @for($i=0;$i<count($pendingFriendRequest);$i++)
-                    <div>
-                        <p>{{$pendingFriendRequest[$i]->receiver->username}} {{$pendingFriendRequest[$i]->receiver->level}}</p>
-                        @if ($pendingFriendRequest[$i]->receiver->profile_picture == '')
-                            <img src={{asset('/images/profile.png')}} alt="profile picture">
-                        @else
-                            <img src="{{Storage::url($pendingFriendRequest[$i]->receiver->profile_picture)}}" 
-                            alt="{{$pendingFriendRequest[$i]->receiver->username}}">
-                        @endif
-                        <p>{{$pendingFriendRequest[$i]->receiver->role}}</p>
-                        <form action="/friendRequests/{{$pendingFriendRequest[$i]->friend_request_id}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Cancel</button>
-                        </form>
+                    <div class='pendingfriendrequests-items'>
+                        <div class='pendingfriendrequests-items-top'>
+                            <div class='pendingfriendrequests-items-top-left'>
+                                <p class='pendingfriendrequests-item-username'>{{$pendingFriendRequest[$i]->receiver->username}} <span class='pendingfriendrequests-item-level'>{{$pendingFriendRequest[$i]->receiver->level}}</span></p>
+                                <p>{{$pendingFriendRequest[$i]->receiver->role}}</p>
+                            </div>
+                            @if ($pendingFriendRequest[$i]->receiver->profile_picture == '')
+                                <img class='pendingfriendrequests-item-profpic' src={{asset('/images/profile.png')}} alt="profile picture">
+                            @else
+                                <img class='pendingfriendrequests-item-profpic' src="{{Storage::url($pendingFriendRequest[$i]->receiver->profile_picture)}}" 
+                                alt="{{$pendingFriendRequest[$i]->receiver->username}}">
+                            @endif
+                        </div>
+                        <div class='pendingfriendrequests-items-bottom'>
+                            <form action="/friendRequests/{{$pendingFriendRequest[$i]->friend_request_id}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Cancel</button>
+                            </form>
+                        </div>
                     </div>
                 @endfor
+            </div>  
             @endif
         </div>
         <div>
@@ -80,17 +105,21 @@
             @if(count($friendDetails)==0)
                 <p>There is no friend</p>
             @else
+            <div id='friends-container'>
                 @for($i=0;$i<count($friendDetails);$i++)
-                    <div>
-                        <p>{{$friendDetails[$i]->user->username}} {{$friendDetails[$i]->user->level}}</p>
+                    <div class='friends-items'>
+                        <div class='friends-items-left'>
+                            <p class='friends-items-username'>{{$friendDetails[$i]->user->username}} <span class='friends-items-level'>{{$friendDetails[$i]->user->level}}</span></p>
+                            <p>{{$friendDetails[$i]->user->role}}</p>
+                        </div>
                         @if ($friendDetails[$i]->user->profile_picture == '')
-                            <img src={{asset('/images/profile.png')}} alt="profile picture">
+                            <img class='friends-items-profpic' src={{asset('/images/profile.png')}} alt="profile picture">
                         @else
-                            <img src="{{Storage::url($friendDetails[$i]->user->profile_picture)}}" alt="">
+                            <img class='friends-items-profpic' src="{{Storage::url($friendDetails[$i]->user->profile_picture)}}" alt="">
                         @endif
-                        <p>{{$friendDetails[$i]->user->role}}</p>
                     </div>
                 @endfor
+            </div>
             @endif
         </div>
     </div>

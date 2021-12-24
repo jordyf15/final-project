@@ -26,13 +26,13 @@ class FriendController extends Controller
     }
 
     public function addFriend(Request $request){
-        // gk boleh add diri sendiri
         $user = Auth::user();
         $friendUsername = $request->username;
-        $friend = User::where('username', $friendUsername)->first();
-        if(!$friend) return back()->withErrors(['error','User was not found']);
+        $friend = User::where('username', $friendUsername)->where('role','member')->first();
+        if(!$friend) return back()->withErrors(['User was not found']);
         $friend_id = $friend->user_id;
         $user_id = $user->user_id;
+        if($friend_id == $user_id) return back()->withErrors(['You cannot befriend yourself']);
 
         $friendDetails = $user->friendList->friendDetails;
         $alreadyInFriendList = false;
@@ -40,7 +40,7 @@ class FriendController extends Controller
             if($friendDetails[$i]->user->user_id == $friend_id) $alreadyInFriendList = true;
         }
         if($alreadyInFriendList == true){
-            return back()->withErrors(['error', 'The user is already in the friend list']);
+            return back()->withErrors(['The user is already in the friend list']);
         }
 
         $incomingFriendRequests = $user->incomingFriendRequests;
@@ -49,7 +49,7 @@ class FriendController extends Controller
             if($incomingFriendRequests[$i]->sender->user_id == $friend_id) $alreadyIncomingFriendRequest = true;
         }
         if($alreadyIncomingFriendRequest == true){
-            return back()->withErrors(['error', 'The user is already in the incoming friend request list']);
+            return back()->withErrors(['The user is already in the incoming friend request list']);
         }
 
         $pendingFriendRequests = $user->pendingFriendRequests;
