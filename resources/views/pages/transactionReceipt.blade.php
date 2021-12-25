@@ -4,9 +4,9 @@
     <div id="bread-container">
         <div id="bread">
             <ol style="--bs-breadcrumb-divider: '>';" class="breadcrumb">
-                <li class="breadcrumb-item active">Shopping Cart</li>
+                <li class="breadcrumb-item">Shopping Cart</li>
                 <li class="breadcrumb-item">Transaction Information</li>
-                <li class="breadcrumb-item">Transaction Receipt</li>
+                <li class="breadcrumb-item active">Transaction Receipt</li>
             </ol>
         </div>
     </div>
