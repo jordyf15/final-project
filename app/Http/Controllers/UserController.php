@@ -22,11 +22,17 @@ class UserController extends Controller
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
   
     public function showRegisterForm(){
-        return view('register');
+        if(!Auth::user()){
+            return view('register');
+        }
+        return redirect('/');
     }
 
     public function showLoginForm(){
-        return view('login');
+        if(!Auth::user()){
+            return view('login');
+        }
+        return redirect('/');
     }
 
     public function login(Request $request){
