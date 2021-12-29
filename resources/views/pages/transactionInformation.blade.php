@@ -63,7 +63,7 @@
                                 <p>Total Price <span>Rp. {{$total_price}}</span></p>
                             </div>
                             <div id="country-detail">
-                                <div id="transact-cancel-btn"><a href="/cart"><button class="btn">Cancel</button></a></div>
+                                <div id="transact-cancel-btn"><a href="/cart"><button class="btn" type="button">Cancel</button></a></div>
                                 <div id="transact-checkout-btn"><button class="btn" type="submit">Checkout</button></div>
                             </div>
                         </div>
